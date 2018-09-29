@@ -37,16 +37,17 @@ export default class DynamicOptionList extends React.Component {
       dirty: true
     });
   }
-  editOptionCorrect(option_index, e) {
-    let this_element = this.state.element;
-    if (this_element.options[option_index].hasOwnProperty("correct")) {
-      delete(this_element.options[option_index]["correct"]);
-    } else {
-      this_element.options[option_index].correct = true;
-    }
-    this.setState({element: this_element});
-    this.props.updateElement.call(this.props.preview, this_element);
-  }
+  // editOptionCorrect(option_index, e) {
+  //   let this_element = this.state.element;
+  //   if (this_element.options[option_index].hasOwnProperty("correct")) {
+  //     delete(this_element.options[option_index]["correct"]);
+  //   } else {
+  //     this_element.options[option_index].correct = true;
+  //   }
+  //   this.setState({element: this_element});
+  //   this.props.updateElement.call(this.props.preview, this_element);
+  // }
+
   updateOption() {
     let this_element = this.state.element;
     // to prevent ajax calls with no change
@@ -71,9 +72,9 @@ export default class DynamicOptionList extends React.Component {
         <ul>
           <li>
             <div className="row">
-              <div className="col-sm-6"><b>Options</b></div>
-              <div className="col-sm-2"><b>Value</b></div>
-              <div className="col-sm-4"><b>Correct</b></div>
+              <div className="col-sm-12"><b>Options</b></div>
+              {/* <div className="col-sm-2"><b>Value</b></div> */}
+              {/* <div className="col-sm-4"><b>Correct</b></div> */}
             </div>
           </li>
           {
@@ -83,15 +84,15 @@ export default class DynamicOptionList extends React.Component {
               return (
                 <li className="clearfix" key={this_key}>
                   <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-9">
                       <input tabIndex={index+1} className="form-control" style={{width: '100%'}} type="text" name={'text_'+index} placeholder="Option text" value={option.text} onBlur={this.updateOption.bind(this)} onChange={this.editOption.bind(this, index)} />
                     </div>
-                    <div className="col-sm-2">
-                      <input className="form-control" type="text" name={'value_'+index} value={val} onChange={this.editValue.bind(this, index)} />
-                    </div>
-                     <div className="col-sm-1">
+                    {/* <div className="col-sm-2">
+                      <input className="form-control" type="text" name={'value_'+index} value={option.text.replace(/\s/g,'')} disabled onChange={this.editValue.bind(this, index)} />
+                    </div> */}
+                     {/* <div className="col-sm-1">
                       <input className="form-control" type="checkbox" value="1" onChange={this.editOptionCorrect.bind(this, index)} checked={option.hasOwnProperty("correct")} />
-                    </div>
+                    </div> */}
                     <div className="col-sm-3">
                       <div className="dynamic-options-actions-buttons">
                         <button onClick={this.addOption.bind(this, index)} className="btn btn-success"><i className="fa fa-plus-circle"></i></button>

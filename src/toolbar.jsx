@@ -57,21 +57,21 @@ export default class Toolbar extends React.Component {
         name: 'Header Text',
         icon: 'fa fa-header',
         static: true,
-        content: 'Placeholder Text...'
+        content: 'Dummy Text...'
       },
       {
         key: 'Label',
         name: 'Label',
         static: true,
         icon: 'fa fa-font',
-        content: 'Placeholder Text...'
+        content: 'Dummy Text...'
       },
       {
         key: 'Paragraph',
         name: 'Paragraph',
         static: true,
         icon: 'fa fa-paragraph',
-        content: 'Placeholder Text...'
+        content: 'Dummy Text...'
       },
       {
         key: 'LineBreak',
@@ -119,9 +119,17 @@ export default class Toolbar extends React.Component {
         key: 'TextInput',
         canHaveAnswer: true,
         name: 'Text Input',
-        label: 'Placeholder Label',
+        label: 'Title Text Input',
         icon: 'fa fa-font',
         field_name: 'text_input_'
+      },
+      {
+        key:'EmailInput',
+        canHaveAnswer:true,
+        name:'Email Input',
+        label:'Email',
+        icon:'fa fa-envelope',
+        field_name:'email_input_'
       },
       {
         key: 'NumberInput',
@@ -134,7 +142,7 @@ export default class Toolbar extends React.Component {
       {
         key: 'TextArea',
         canHaveAnswer: true,
-        name: 'Multi-line Input',
+        name: 'Text Area',
         label: 'Placeholder Label',
         icon: 'fa fa-text-height',
         field_name: 'text_area_'
@@ -219,7 +227,8 @@ export default class Toolbar extends React.Component {
       element: item.key,
       text: item.name,
       static: item.static,
-      required: false
+      required: false,
+      validate:false
     };
 
     if(item.static) {

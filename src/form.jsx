@@ -145,9 +145,9 @@ export default class ReactForm extends React.Component {
     let errors = [];
     let data_items = this.props.data;
 
-    if(this.props.display_short) {
-      data_items = this.props.data.filter((i) => i.alternateForm === true);
-    }
+    // if(this.props.display_short) {
+    //   data_items = this.props.data.filter((i) => i.alternateForm === true);
+    // }
 
     data_items.forEach(item => {
       if (item.element === 'Signature') {
@@ -185,10 +185,9 @@ export default class ReactForm extends React.Component {
 
   render() {
     let data_items = this.props.data;
-
-    if (this.props.display_short) {
-      data_items = this.props.data.filter((i) => i.alternateForm === true);
-    }
+    // if (this.props.display_short) {
+    //   data_items = this.props.data.filter((i) => i.alternateForm === true);
+    // }
 
     data_items.forEach((item) => {
       if (item.readOnly && item.variableKey && this.props.variables[item.variableKey]) {
@@ -201,6 +200,7 @@ export default class ReactForm extends React.Component {
 
         case 'TextInput':
         case 'NumberInput':
+        case 'EmailInput':
         case 'TextArea':
         case 'Dropdown':
         case 'DatePicker':

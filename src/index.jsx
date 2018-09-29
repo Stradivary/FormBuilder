@@ -60,14 +60,14 @@ class ReactFormBuilder extends React.Component {
      toolbarProps.items = this.props.toolbarItems;
    return (
        <div>
-         {/* <div>
-           <p>
-             It is easy to implement a sortable interface with React DnD. Just make
-             the same component both a drag source and a drop target, and reorder
-             the data in the <code>hover</code> handler.
-           </p>
-           <Container />
-         </div> */}
+      {/* //    <div>
+      //      <p>
+      //        It is easy to implement a sortable interface with React DnD. Just make
+      //        the same component both a drag source and a drop target, and reorder
+      //        the data in the <code>hover</code> handler.
+      //      </p>
+           
+      //    </div> */}
          <div className="react-form-builder clearfix">
            <div>
              <Preview files={this.props.files}

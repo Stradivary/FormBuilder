@@ -21,7 +21,8 @@ export default class FormElementsEdit extends React.Component {
     this.state = {
       element: this.props.element,
       data: this.props.data,
-      dirty: false
+      dirty: false,
+      previewVisible: false
     }
   }
   toggleRequired() {
@@ -73,7 +74,9 @@ export default class FormElementsEdit extends React.Component {
   }
 
   render() {
+
     let this_checked = this.props.element.hasOwnProperty('required') ? this.props.element.required : false;
+    let this_validate = this.props.element.hasOwnProperty('validate') ? this.props.element.validate : false;
     let this_read_only = this.props.element.hasOwnProperty('readOnly') ? this.props.element.readOnly : false;
     let this_default_today = this.props.element.hasOwnProperty('defaultToday') ? this.props.element.defaultToday : false;
     let this_checked_inline = this.props.element.hasOwnProperty('inline') ? this.props.element.inline : false;
@@ -170,6 +173,12 @@ export default class FormElementsEdit extends React.Component {
                 Required
               </label>
             </div>
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" checked={this_validate} value={true} onChange={this.editElementProp.bind(this, 'validate', 'checked')} />
+                Validated
+              </label>
+            </div>
             { this.props.element.hasOwnProperty('readOnly') &&
               <div className="checkbox">
                 <label>
@@ -209,7 +218,7 @@ export default class FormElementsEdit extends React.Component {
         }
 
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label className="control-label">Print Options</label>
           <div className="checkbox">
             <label>
@@ -227,7 +236,7 @@ export default class FormElementsEdit extends React.Component {
               Display on alternate/signature Page?
             </label>
           </div>
-        </div>
+        </div> */}
 
         { this.props.element.hasOwnProperty('step') &&
           <div className="form-group">
@@ -263,7 +272,7 @@ export default class FormElementsEdit extends React.Component {
             </div>
           </div>
         }
-        { this.props.element.hasOwnProperty('static') && this.props.element.static &&
+        {/* { this.props.element.hasOwnProperty('static') && this.props.element.static &&
           <div className="form-group">
             <label className="control-label">Text Style</label>
             <div className="checkbox">
@@ -279,7 +288,7 @@ export default class FormElementsEdit extends React.Component {
               </label>
             </div>
           </div>
-        }
+        } */}
 
         { this.props.showCorrectColumn && this.props.element.canHaveAnswer && !this.props.element.hasOwnProperty('options') &&
           <div className="form-group">

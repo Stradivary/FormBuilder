@@ -132,11 +132,13 @@ class TextInput extends React.Component {
     this.inputField = React.createRef();
   }
 
+
   render() {
     let props = {};
     props.type = "text";
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    console.log(this.props.data)
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
@@ -156,7 +158,7 @@ class TextInput extends React.Component {
             { this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
-            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} validate={this.props.data.validate} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
         <div className="form-group">
@@ -167,11 +169,75 @@ class TextInput extends React.Component {
               <span className="label-required label label-danger">Required</span>
             }
           </label>
+          <label>
+            {/* <span dangerouslySetInnerHTML={{__html:myxss.process(this.props.data.label)}} /> */}
+            {
+              (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+              <span className="label-validate label label-success">Validate</span>
+            }
+          </label>
+
           <input {...props} />
         </div>
       </div>
     );
   }
+}
+
+class EmailInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputField = React.createRef();
+  }
+render(){
+  let props = {};
+  props.type= "email";
+  props.className = "form-control";
+  props.nam = this.props.data.field_name;
+  if(this.props.mutable){
+    props.defaultValue = this.props.defaultValue;
+    props.ref = this.inputField;
+  }
+
+  if(this.props.read_only){
+    props.disabled = "disabled";
+  }
+
+  let baseClasses = 'SortableItem rfb-item';
+  if(this.props.data.pageBreakBefore){
+    baseClasses += 'alwaysbreak';
+  }
+
+  return(
+    <div className={baseClasses}>
+    { !this.props.mutable &&
+      <div>
+        { this.props.data.pageBreakBefore &&
+          <div className="preview-page-break">Page Break</div>
+        }
+        <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} validate={this.props.data.validate} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+
+      </div>
+    }
+    <div className="form-group">
+    <label>
+        <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
+
+        { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
+          <span className="label-required label label-danger">Required</span>
+        }
+      </label>
+      <label>
+        {
+          (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+          <span className="label-validate label label-danger">Validate</span>
+        }
+      </label>
+      <input {...props} />
+    </div>
+  </div>
+  )
+}
 }
 
 class NumberInput extends React.Component {
@@ -205,15 +271,21 @@ class NumberInput extends React.Component {
             { this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
-            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} validate={this.props.data.validate} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
         <div className="form-group">
-          <label>
+        <label>
             <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
 
             { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
+            }
+          </label>
+          <label>
+            {
+              (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+              <span className="label-validate label label-danger">Validate</span>
             }
           </label>
           <input {...props} />
@@ -253,7 +325,7 @@ class TextArea extends React.Component {
             { this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
-            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} validate={this.props.data.validate} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
         <div className="form-group">
@@ -263,6 +335,14 @@ class TextArea extends React.Component {
               <span className="label-required label label-danger">Required</span>
             }
           </label>
+          <label>
+            {/* <span dangerouslySetInnerHTML={{__html:myxss.process(this.props.data.label)}} /> */}
+            {
+              (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+              <span className="label-validate label label-success">Validate</span>
+            }
+          </label>
+
           <textarea {...props} />
         </div>
       </div>
@@ -325,7 +405,6 @@ class DatePicker extends React.Component {
       this.state.value = '';
       this.state.internalValue = undefined;
     }
-
     this.state.defaultToday = this.props.data.defaultToday;
   }
 
@@ -356,7 +435,7 @@ class DatePicker extends React.Component {
             { this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
-            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} validate={this.props.data.validate} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
         <div className="form-group">
@@ -364,6 +443,13 @@ class DatePicker extends React.Component {
             <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
             { (this.props.data.hasOwnProperty('required') && this.props.data.required === true && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
+            }
+          </label>
+          <label>
+            {/* <span dangerouslySetInnerHTML={{__html:myxss.process(this.props.data.label)}} /> */}
+            {
+              (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+              <span className="label-validate label label-success">Validate</span>
             }
           </label>
           <div>
@@ -436,7 +522,7 @@ class Dropdown extends React.Component {
             { this.props.data.pageBreakBefore &&
               <div className="preview-page-break">Page Break</div>
             }
-            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
+            <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} validate={this.props.data.validate} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} static={this.props.data.static} required={this.props.data.required} />
           </div>
         }
         <div className="form-group">
@@ -444,6 +530,13 @@ class Dropdown extends React.Component {
             <span dangerouslySetInnerHTML={{__html: myxss.process(this.props.data.label) }} />
             { (this.props.data.hasOwnProperty('required') && this.props.data.required === true  && !this.props.read_only) &&
               <span className="label-required label label-danger">Required</span>
+            }
+          </label>
+          <label>
+            {/* <span dangerouslySetInnerHTML={{__html:myxss.process(this.props.data.label)}} /> */}
+            {
+              (this.props.data.hasOwnProperty('validate') && this.props.data.validate === true && !this.props.read_only) &&
+              <span className="label-validate label label-success">Validate</span>
             }
           </label>
           <select {...props}>
@@ -981,6 +1074,7 @@ FormElements.Paragraph = Paragraph;
 FormElements.Label = Label;
 FormElements.LineBreak = LineBreak;
 FormElements.TextInput = TextInput;
+FormElements.EmailInput = EmailInput;
 FormElements.NumberInput = NumberInput;
 FormElements.TextArea = TextArea;
 FormElements.Dropdown = Dropdown;

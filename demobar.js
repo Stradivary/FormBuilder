@@ -21,6 +21,7 @@ export default class Demobar extends React.Component {
     this.setState({
       previewVisible: true
     })
+    console.log(this.state.data)
   }
 
   showShortPreview() {
@@ -33,6 +34,7 @@ export default class Demobar extends React.Component {
     this.setState({
       roPreviewVisible: true
     })
+    console.log(this.state.data)
   }
 
   closePreview() {
@@ -65,11 +67,23 @@ export default class Demobar extends React.Component {
       roModalClass += ' show';
     }
 
+    var showJson =[];
+
+    if(this.state.data != null || this.state.data != undefined || this.state.data != []){
+      showJson = (
+        <textarea value={JSON.stringify(this.state.data)} rows={4} cols={80} disabled={true}></textarea>
+      )
+      console.log('Masuk')
+
+    }else if(this.state.data == []){
+      console.log('Gagal')
+    }
+
     return(
       <div className="clearfix" style={{margin:'10px', width:'70%'}}>
-        <h4 className="pull-left">Preview</h4>
+        <h4 className="pull-left">Form Test Coba</h4>
         <button className="btn btn-primary pull-right" style={{ marginRight: '10px'}} onClick={this.showPreview.bind(this)}>Preview Form</button>
-        <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showShortPreview.bind(this)}>Alternate/Short Form</button>
+        {/* <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showShortPreview.bind(this)}>Alternate/Short Form</button> */}
         <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showRoPreview.bind(this)}>Read Only Form</button>
 
         { this.state.previewVisible &&
@@ -81,12 +95,12 @@ export default class Demobar extends React.Component {
                   back_action="/"
                   back_name="Back"
                   answer_data={{}}
-                  action_name="Save"
+                  action_name="Save This"
                   form_action="/"
                   form_method="POST"
                   variables={this.props.variables}
                   data={this.state.data} />
-
+                {showJson}
                 <div className="modal-footer">
                   <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
                 </div>

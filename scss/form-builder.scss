@@ -53,15 +53,27 @@
     .form-label {
       display: block !important;
     }
+    .edit-form-background{
+      z-index: -1;
+      opacity: 0;
+      display: none;
+      overflow: hidden;
+      -webkit-overflow-scrolling: touch;
+      outline: 0;
+      background: rgba(0,0,0, 0.3);  
+      transition:0.5;   
+    }
 
     .edit-form {
       position: fixed;
+      z-index:-1;
       background: #fafafa;
       padding: 30px;
       border-left: 0;
       box-shadow: none;
       top: 0;
-      left: -1000px;
+      opacity: 0;
+      // left: -1000px;
       height: 100%;
       // width: 0;
       width: 715px;
@@ -209,12 +221,28 @@
       //   opacity: .5;
       //   transition: opacity .25s ease-in;
       // }
+      .edit-form-background{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        opacity: 1;
+        display: none;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+        background: rgba(0,0,0, 0.3);  
+        transition:0.5;   
+      }
+  
       .edit-form {
         z-index: 2000;
         border-right: 1px solid #ddd;
         box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
         // width: 80%;
-        left: 0;
+        // left: 0;
+        opacity:1;
         transition: .5s;
       }
     }

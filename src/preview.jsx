@@ -17,7 +17,8 @@ export default class Preview extends React.Component {
 
     this.state = {
       data: [],
-      answer_data: {}
+      answer_data: {},
+      previewVisible: false
     }
 
     var loadData = (this.props.url) ? this.props.url : (this.props.data) ? this.props.data : [];
@@ -119,6 +120,7 @@ export default class Preview extends React.Component {
         <div className="Sortable">{items}</div>
          <PlaceHolder id="form-place-holder" show={items.length == 0} index={items.length} moveCard={this.cardPlaceHolder} insertCard={this.insertCard}/>
       </div>
+      
     )
   }
 }

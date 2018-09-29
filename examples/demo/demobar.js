@@ -68,7 +68,7 @@ export default class Demobar extends React.Component {
       <div className="clearfix" style={{margin:'10px', width:'70%'}}>
         <h4 className="pull-left">Preview</h4>
         <button className="btn btn-primary pull-right" style={{ marginRight: '10px'}} onClick={this.showPreview.bind(this)}>Preview Form</button>
-        <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showShortPreview.bind(this)}>Alternate/Short Form</button>
+        {/* <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showShortPreview.bind(this)}>Alternate/Short Form</button> */}
         <button className="btn btn-default pull-right" style={{ marginRight: '10px'}} onClick={this.showRoPreview.bind(this)}>Read Only Form</button>
 
         { this.state.previewVisible &&
